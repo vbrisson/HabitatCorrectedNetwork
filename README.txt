@@ -3,8 +3,8 @@ Description
 ***********
 
 HabitatCorrectedNetwork.py is a python module for calculating 
-correlation matrices for network analysis that account for habitat
-filtering effects.  
+correlation matrices for microial correlation network analysis 
+that account for habitat filtering effects.  
 
 HabitatCorrectedNetwork.py is compatible with both Python2 and Python3.  
 In addition to standard python libraries, it relies on the numpy, 
