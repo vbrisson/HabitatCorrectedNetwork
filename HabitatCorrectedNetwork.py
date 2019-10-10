@@ -24,7 +24,7 @@ def read_OTU_table(filename):
     #   subsequent rows start with the sample name followed by OTU counts for that sample
     print('Reading OTU table data')
     sample_names = []
-    f = file(filename, 'r')
+    f = open(filename, 'r')
     first = True
     for line in f:
         columns = line.split()
@@ -46,7 +46,7 @@ def read_sample_data(filename):
     #   subsequent rows give data for each sample
     print('Reading sample data')
     subgroup_data = {}
-    f = file(filename, 'r')
+    f = open(filename, 'r')
     first = True
     for line in f:
         columns = line.split()
@@ -244,45 +244,45 @@ def custom_HF_groups(valid_groups):
 
 def custom_param():  
     # Allow user to interactivly enter analysis parameters
-    print
+    print()
     CLR = False
     CLR_YN = raw_input('Do you want to CLR transform the data to correct for compositional effects (yes/no)? ')
     while not(CLR_YN in ['y','Y','yes','n','N', 'no']):
         CLR_YN = raw_input('Please answer "yes" or "no". ')
     if CLR_YN in ['y', 'Y', 'yes']:
         CLR = True
-    print     
+    print()     
     pval_correction = False
     pval_YN = raw_input('Do you want to adjust the pvalues for multipe comparisons (yes/no)? ')
     while not(pval_YN in ['y','Y','yes','n','N', 'no']):
         pval_YN = raw_input('Please answer "yes" or "no". ')
     if pval_YN in ['y', 'Y', 'yes']:
         pval_correction = True
-    print    
+    print()    
     corr_method = raw_input('Select the desired correlation method (Spearman or Pearson): ')
     while not(corr_method in ['spearman', 'Spearman', 'pearson', 'Pearson']):
         corr_method = raw_input('Please enter either "Spearman" or "Pearson". ')
-    print    
+    print()    
     min_prev = raw_input('Please enter the minimum OTU prevalence (between 0 and 1). ')
     while not(valid_entry(min_prev)):
         min_prev = raw_input('Please enter a number between 0 and 1. ')
     min_prev = float(min_prev)
-    print
+    print()
     min_corr = raw_input('Please enter the minimum correlation value (between 0 and 1). ')
     while not(valid_entry(min_corr)):
         min_corr = raw_input('Please enter a number between 0 and 1. ')
     min_corr = float(min_corr)
-    print
+    print()
     max_pval = raw_input('Please enter the maximum p-value (between 0 and 1). ')
     while not(valid_entry(max_pval)):
         max_pval = raw_input('Please enter a number between 0 and 1. ')
     max_pval = float(max_pval)
-    print
+    print()
     direction = 'pos'
     direction = raw_input('Which type(s) of correlation do you want to include (positive, negative, or both)? ')
     while not(direction in ['pos','positive','neg', 'negative', 'both']):
         direction = raw_input('Please enter "positive", "negative", or "both". ')
-    print    
+    print()    
     return(CLR, pval_correction, corr_method, min_prev, min_corr, max_pval, direction)
 
 def check_parameters(CLR, pval_correction, corr_method, min_prev, min_corr, max_pval, direction):
@@ -381,7 +381,7 @@ def HF_analysis(OTU_filename,
     OTU_subsets = {}
     
     for group in split_data_arrays.keys(): 
-        print
+        print()
         print('Processing data:\t' + group)
         split_data_arrays_filt[group], OTU_subsets[group] = filter_OTU_prevalence(split_data_arrays[group], 
                                                                              master_OTU_list, 
@@ -409,7 +409,7 @@ def save_output(correlations,
     for k in correlations.keys():
         np.savetxt(output_prefix + "_" + k + '_correlations.txt', correlations[k])
         np.savetxt(output_prefix + "_" + k + '_pvalues.txt', pvalues[k])
-        f = file(output_prefix + "_" + k + '_ASVs.txt', 'w')
+        f = open(output_prefix + "_" + k + '_ASVs.txt', 'w')
         for OTU in OTU_subsets[k]:
             f.write(OTU + '\n')
         f.close()
