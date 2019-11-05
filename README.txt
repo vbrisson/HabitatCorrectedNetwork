@@ -15,7 +15,7 @@ The tool takes in 2 files:
   - a sample data file
 It saves the results to 3 files for each analysis 
   - a list of ASV (or OTU) names in the network 
-  - a correlation matrix or r values filtered to include only the 
+  - a correlation matrix of r values filtered to include only the 
 desired correlations based on input parameters
   - a corresponding matrix of p-values
 
